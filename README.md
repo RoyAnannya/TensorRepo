@@ -1,19 +1,21 @@
-#Text Classification & Cluster Prediction
-Implement four neural networks in Tensorflow for multi-class text classification problem. (To be read while model training)
+# Text Classification & Cluster Prediction
+Implement CLSTM neural networks in Tensorflow for multi-class text classification problem.
 
-##Models
-A CNN classifier. See cnn_classifier.py.
-A C-LSTM classifier. See clstm_classifier.py.
+## Models
+* A C-LSTM classifier. See clstm_classifier.py.
 
-##Requirements
-Python 3.x
-Tensorflow > 1.5
-Sklearn > 0.19.0
+## Requirements  
+* Python 3.x  
+* Tensorflow > 1.5
+* Sklearn > 0.19.0  
 
-##Data Format
-Training data should be stored in csv file. The first line of the file should be ["date","time","label", "title","content"] 
+## Data Format
+Training data should be stored in csv file. The first line of the file should be ["date","time","label", "title","content"]
 
-##Training Parameters:
+## Train
+Run train.py to train the models.
+Parameters:
+```
 optional arguments:
   --clf CLF             Type of classifiers. Default: cnn. You have four
                         choices: [cnn, lstm, blstm, clstm]
@@ -64,17 +66,24 @@ optional arguments:
                         Save the model after this many steps
   --num_checkpoint NUM_CHECKPOINT
                         Number of models to store
-
-##You could run train.py to start training. For example:
-
+```
+You could run train.py to start training. For example:
+```
 python train.py --data_file=./data/${filename}.csv --clf=${model_name}
+python train.py --data_file=./data/log_file.csv --clf=clstm
+```
 
-##After the training is done, you can use tensorboard to see the visualizations of the graph, losses and evaluation metrics:
+After the training is done, you can use tensorboard to see the visualizations of the graph, losses and evaluation metrics:  
 
+```
 tensorboard --logdir=./runs/${model_run_no}/summaries
+tensorboard --logdir=./runs/1551677364/summaries
+```
 
-
-##Test Parameters:
+## Test 
+Run test.py to evaluate the trained model  
+Parameters: 
+```
 optional arguments:
   --test_data_file TEST_DATA_FILE
                         Test data file path
@@ -83,6 +92,12 @@ optional arguments:
                         Restore the graph from this checkpoint
   --batch_size BATCH_SIZE
                         Test batch size
-##You could run test.py to start evaluation. For example:
-
+```
+You could run test.py to start evaluation. For example:
+```
 python test.py --test_data_file=./data/data.csv --run_dir=./runs/${model_run_no} --checkpoint=clf-${checkpoint_no}
+
+python test.py --test_data_file=./data/log_file.csv --run_dir=./runs/1550732458 --checkpoint=clf-1000
+python test.py --test_data_file=./data/log_file_test.csv --run_dir=./runs/1551677364 --checkpoint=clf-1000
+
+```
