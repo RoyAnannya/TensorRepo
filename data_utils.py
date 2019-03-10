@@ -15,7 +15,6 @@ timestamp = str(int(time.time()))
 outdir = os.path.abspath(os.path.join(os.path.curdir, "runs", timestamp))
 if not os.path.exists(outdir):
     os.makedirs(outdir)
-# outdir = "C:/Glassbox/gbx_model3/runs/1551677364/summaries"
 
 def load_data(file_path, sw_path=None, min_frequency=0, max_length=0, language='en', vocab_processor=None, shuffle=True):
     """
@@ -129,7 +128,6 @@ def batch_iter(data, labels, lengths, batch_size, num_epochs):
 # --------------- Private Methods ---------------
 
 def _tradition_2_simple(sent):
-    """ Convert Traditional Chinese to Simplified Chinese """
     # Please download langconv.py and zh_wiki.py first
     # langconv.py and zh_wiki.py are used for converting between languages
     try:
@@ -144,7 +142,7 @@ def _tradition_2_simple(sent):
 
 
 def _word_segmentation(sent):
-    """ Tokenizer for Chinese """
+    """ Tokenizer """
     import jieba
     sent = ' '.join(list(jieba.cut(sent, cut_all=False, HMM=True)))
     return re.sub(r'\s+', ' ', sent)
